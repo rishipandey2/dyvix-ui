@@ -37,7 +37,7 @@ function DyvixToastContainer({
   React.useEffect(() => {
     const unsub = subscribe((newToast) => {
       setToasts((prev) => {
-        const next = [...prev, { ...newToast, id: prev.length + 1 }];
+        const next = [...prev, { ...newToast, id: crypto.randomUUID() }];
         return next;
       });
     });
@@ -51,11 +51,10 @@ function DyvixToastContainer({
           (e) => e.type.trim().toLowerCase() === toast.type.trim().toLowerCase()
         );
         const currentclass = `dyvix-toast ${currentType.class}`;
-        const randid = crypto.randomUUID();
 
         return (
           <DyvixToastItem
-            key={randid}
+            key={toast.id}
             message={toast.message}
             onClose={() =>
               setToasts((prev) => prev.filter((t) => t.id !== toast.id))
