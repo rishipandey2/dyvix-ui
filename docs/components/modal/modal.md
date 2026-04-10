@@ -1,8 +1,8 @@
 ---
 title: Dyvix Modal
 next:
-  text: 'Select'
-  link: 'components/select/select'
+  text: 'Modal elements'
+  link: 'components/modal/elements'
 ---
 
 # Modal
@@ -18,23 +18,25 @@ The modal component is a core Dyvix UI component. It's a config driven, animated
 - `Class`
   - : `string`. Contains a custom class for your modal, allowing more control for the developer.
 - `type`
-  - : `string`. Represents the type of the modal. Defaults to `form`.
+  - : `string`. Represents the type of the modal. Defaults to `form`. Supported types are `form` and `auth`.
 - `theme`
-  - : `string`. Controls the design and the feel of the modal.
+  - : `string`. Controls the design and the feel of the modal. See the [Themes list](/components/modal/themes) for a full list.
 - `animation`
-  - : `string`. Controls the entrance animation of the modal.
+  - : `string`. Controls the entrance animation of the modal. See the [Animation List](/guide/animations) for a full list.
 - `preset`
-  - : `string`. A convenience attribute that populates the modal with predefined configuration. Using presets overrides elements attribute with modal common-uses.
+  - : `string`. A convenience attribute that populates the modal with predefined configuration. Using presets overrides elements attribute with modal common-uses. See the [Preset list](/components/modal/presets) for a full list.
 - `elements`
   - : An array of objects that defines the internal fields of the modal. Each object supports the following attributes:
     - `amount`
       - : `number`. The number of inputs to display per row. Supported values are between 1 and 3.
     - `type`
-      - : `string`. The type of input to render in this specific row.
+      - : `string`. The type of input to render in this specific row. See the [elements list](/components/modal/elements) for a full list.
     - `name`
       - : `string | string[]`. The key used in the `onSubmit` callback. If the amount is greater than 1 this must be provided as an array of strings with length matching that of the amount.
     - `placeholder`
       - : `string | string[]`. The text displayed when the input is empty. If the amount is greater than 1 this must be provided as an array of strings with length matching that of the amount.
+    - `id`
+      - : `string | string[]`. A Unique optional ID for indivisual fields, allowing more control for the developer. If the amount is greater than 1 this must be provided as an array of strings with length matching that of the amount.
     - `options`
       - : `Array of Array[values]`. Required when type is `select`, `d-select`, and `autocomplete`. It provides selection data for the supported elements, the amount of sub-arrays must match the amount property. For example:
 
@@ -53,7 +55,7 @@ The modal component is a core Dyvix UI component. It's a config driven, animated
         ```
 
     - `validation`
-      - : `string | string[]`. Premade validation preset. If the amount is greater than 1 this must be provided as an array of strings with length matching that of the amount.
+      - : `string | string[]`. Premade validation preset. If the amount is greater than 1 this must be provided as an array of strings with length matching that of the amount. See the [validators list](/components/modal/validation) for a full list.
 
 - `onSubmit`
   - : `function`. A callback function triggered upon form submission. It receives a single `data` object containing all input names along with their value.

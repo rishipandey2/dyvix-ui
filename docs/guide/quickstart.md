@@ -1,8 +1,8 @@
 ---
 title: Quick start
 next:
-  text: 'Modal'
-  link: 'components/modal/modal'
+  text: 'Animations'
+  link: '/guide/animations'
 ---
 
 # Quick start

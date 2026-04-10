@@ -17,7 +17,7 @@ The container holds & manages toast settings for all outgoing toasts
 - `duration`
   - : `number`. The default duration is `5000` ms. Controls how the duration that indivisual toast is showed.
 - `animation`
-  - : `string`. Controls the entrance animation of the indivisual toast. Defaults to `zoom`.
+  - : `string`. Controls the entrance animation of the indivisual toast. Defaults to `zoom`. See the [Animation Presets](/guide/animations) for a full list.
 
 ### Toast
 
@@ -29,15 +29,18 @@ The container holds & manages toast settings for all outgoing toasts
 ```jsx
 import { DyvixToastContainer, dyvixToast } from 'dyvix-ui';
 
-function notify()
+function ToastExample()
 {
-  dyvixToast.success('This a new message');
-}
+  function notify()
+  {
+    dyvixToast.success('This a new message');
+  }
 
-return (
-  <>
-    <DyvixToastContainer position='top-right' duration={5000} animation='fade'/>
-    <button onClick={notify}>Notify</button>
-  </>
-)
+  return (
+    <>
+      <DyvixToastContainer position='top-right' duration={5000} animation='fade'/>
+      <button onClick={notify}>Notify</button>
+    </>
+  )
+}
 ```

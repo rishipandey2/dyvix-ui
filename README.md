@@ -39,15 +39,34 @@ function ModalExample()
           Class="modal"
           theme='Singularity' // Singularity | Industrial | Ember | Frost | Blade
           elements={[
-            { type: "text", placeholder: ["First Name", "Last Name"], id: "name", name: ["firstName", "lastName"], className: "ex-text", amount: 2 },
-            { type: "email", placeholder: "Email", validation: ["email"], id: "email", name: "email", className: "ex-text", amount: 1 },
-            { type: "password", placeholder: "Password", validation: ["password"], id: "password", name: "password", className: "ex-text", amount: 1 },
+            { type: "text", placeholder: ["First Name", "Last Name"], id: "name", name: ["firstName", "lastName"], amount: 2 },
+            { type: "email", placeholder: "Email", validation: ["email"], id: "email", name: "email", amount: 1 },
+            { type: "password", placeholder: "Password", validation: ["password"], id: "password", name: "password", amount: 1 },
           ]}
           onSubmit={(data) => console.log(data)}
         />
     )
 }
 ````
+
+```jsx
+import { DyvixToastContainer, dyvixToast } from 'dyvix-ui';
+
+function ToastExample()
+{
+  function notify()
+  {
+    dyvixToast.success('This a new message');
+  }
+
+  return (
+    <>
+      <DyvixToastContainer position='top-right' duration={5000} animation='fade'/>
+      <button onClick={notify}>Notify</button>
+    </>
+  )
+}
+```
 
 Full Documentation & Live Demos: [dyvix-ui.vercel.app](https://dyvix-ui.vercel.app/)
 
