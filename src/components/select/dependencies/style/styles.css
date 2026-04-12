@@ -53,11 +53,6 @@
   letter-spacing: 0.5px;
   margin-left: 0.4rem;
 }
-.dyvix-dropdown-select li:hover {
-  transform: scale(1.003);
-  background-color: #e0f7fa;
-  cursor: pointer;
-}
 .dyvix-dropdown-select li:active {
   background-color: #b2ebf2;
   color: white;

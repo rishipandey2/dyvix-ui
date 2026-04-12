@@ -23,7 +23,8 @@ function DynamicSelect({
     is_rendered: true,
     is_open: false,
     elements: [],
-    selected: ''
+    selected: '',
+    activeIndex: -1
   });
   const selectRef = React.useRef(null);
   const dropdownSelectRef = React.useRef(null);
@@ -87,6 +88,48 @@ function DynamicSelect({
     (e) => e.animation.trim().toLowerCase() === animation.trim().toLowerCase()
   );
 
+  function HandleKey(e, controller){
+    if(Select.is_open == false) return 
+
+    const {key} = e;
+    const max = Select.elements.length -1;
+    const min = -1;
+    const index = Select.activeIndex
+
+
+    if(key === "ArrowUp"){
+      if(index <= min) return
+      controller((prevData)=> ({
+        ...prevData,
+        activeIndex: index -1
+      }))
+      e.preventDefault()
+    }
+
+    if(key === "ArrowDown"){
+      if(index >= max) return
+      controller((prevData)=> ({
+        ...prevData,
+        activeIndex: index +1
+      }))
+      e.preventDefault()
+    }
+
+
+    if(key === 'Enter'){
+      if(index < 0 || index > max) return
+      
+      selectRef.current.value = Select.elements[index]
+      controller((prevData)=> ({
+        ...prevData,
+        selected: Select.elements[index],
+        is_open: false,
+        activeIndex: -1
+      }))
+      e.preventDefault()
+    }
+  }
+
   useGSAP(() => {
     if (!selectRef.current || !currentAnimation) return;
 
@@ -119,12 +162,14 @@ function DynamicSelect({
         onBlur={(e) => {
           TranslateEngineType(e.target.value, 'blur', SetSelect);
         }}
+        onKeyDown={(e) => HandleKey(e, SetSelect)}
       />
       <SelectEngine
         elements={Select.elements}
         is_open={Select.is_open}
         is_rendered={Select.is_rendered}
         inputRef={selectRef}
+        activeIndex={Select.activeIndex}
         ref={dropdownSelectRef}
         controller={SetSelect}
         OnChangeCallback={(value) => onChangeInternalCallback(value)}

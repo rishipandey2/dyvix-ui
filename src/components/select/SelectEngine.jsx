@@ -12,6 +12,7 @@ const SelectEngine = forwardRef(
       selectedElement = '',
       placeholder = 'Select...',
       controller,
+      activeIndex,
       inputRef,
       OnChangeCallback,
       type
@@ -28,7 +29,8 @@ const SelectEngine = forwardRef(
       inputRef.current.value = value;
       controller((prevData) => ({
         ...prevData,
-        is_open: false
+        is_open: false,
+        activeIndex: -1
       }));
 
       OnChangeCallback(value);
@@ -72,6 +74,13 @@ const SelectEngine = forwardRef(
       return () => observer.disconnect();
     }, []);
 
+    useEffect(() => {
+      if(activeIndex >= 0 && itemsRef.current[activeIndex]){
+        itemsRef.current[activeIndex].scrollIntoView({block: 'nearest'})
+      }
+    },[activeIndex])
+
+
     return (
       <>
         {is_rendered && (
@@ -91,9 +100,16 @@ const SelectEngine = forwardRef(
                   role="option"
                   ref={(ele) => (itemsRef.current[index] = ele)}
                   key={index}
+                  style={index === activeIndex ? {backgroundColor: '#e0f7fa', cursor: 'pointer'}: {}}
                   onMouseDown={(e) => {
                     e.preventDefault();
                     ChangeValue(element);
+                  }}
+                  onMouseEnter={() => {
+                    controller((prevData) => ({
+                      ...prevData,
+                      activeIndex: index
+                    }));
                   }}
                 >
                   {element}
