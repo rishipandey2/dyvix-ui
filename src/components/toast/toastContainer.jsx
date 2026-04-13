@@ -12,6 +12,13 @@ export const validPositions = positionData.map((e) => e.position);
 export const validTypes = TypesData.map((e) => e.type);
 export const validAnimations = animationsData.map((e) => e.animation);
 
+/**
+ * @param {Object} props
+ * @param {'top-left'|'top-right'|'top-center'|'bottom-left'|'bottom-right'|'bottom-center'} props.position - Toast postion
+ * @param {number} props.segments - The max amount of toast at a time
+ * @param {number} props.duration - The duration to show the toast for in mile seconds.
+ * @param {string} [props.animation] - Animation name, defaults to zoom
+ */
 function DyvixToastContainer({
   position = 'top-right',
   segments = 10,

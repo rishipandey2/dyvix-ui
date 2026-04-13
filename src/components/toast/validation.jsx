@@ -24,8 +24,7 @@ export function ValidateContainer(position, segments, duration, animation) {
       error: 'Please provide a valid animation.'
     };
   }
-  if(segments <= 0 || segments > 10)
-  {
+  if (segments <= 0 || segments > 10) {
     return {
       status: GaurdStatus.Error,
       error: 'Please provide a segment between 1 and 10.'
