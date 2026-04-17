@@ -50,15 +50,16 @@ function DyvixButton({
 
   const props = {
     className: className,
+    disabled: rest.disabled,
     style: {
-      background: background,
-      color: color,
+      ...(background && {background: background}),
+      ...(color && {color: color}),
       ...style
     }
   };
 
   return (
-    <div className='dyvix-btn-wrapper' ref={btnRef}>
+    <div className='dyvix-btn-wrapper' ref={btnRef} {...rest}>
       <button {...props} onClick={handleClick}>
         {children}
       </button>
