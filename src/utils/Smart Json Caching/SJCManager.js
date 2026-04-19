@@ -11,7 +11,13 @@ export async function SJCManager(jsonpath, csspath, type, component, utility, js
   const layerTwoResult = null; // plug the actual func
   if (layerTwoResult !== null) return layerTwoResult;
   const layerThreeResult = await cachelayerThree(jsonpath, csspath, type, 3, component, utility, jsonKey, jsonclasskey);
-  return layerThreeResult;
+  const key = generateCacheKey(2, component, utility);
+
+  if(layerThreeResult.CSS)
+  {
+    InjectCSS(layerThreeResult.CSS, key);
+  }
+  return layerThreeResult.JSON;
 }
 
 async function cachelayerThree(jsonpath, csspath, type, layer, component, utility, jsonKey, jsonclasskey) {
@@ -48,7 +54,7 @@ async function cachelayerThree(jsonpath, csspath, type, layer, component, utilit
     return null;
   }
 
-  cssResult = extractCSSClass(jsonResult[jsonclasskey], null, rawCSS)
+  cssResult = await extractCSSClass(jsonResult[jsonclasskey], null, rawCSS)
 
   let result = {
     ...(cssResult !== null && {"CSS": cssResult}),
@@ -143,12 +149,11 @@ async function extractCSSClass(classname, Csspath=null, cssblock=null) {
 
 function InjectCSS(csstext, Key)
 {
-  const existing = document.querySelector(Key);
+  const existing = document.getElementById(Key);
 
   if (existing) return;
   const style = document.createElement('style');
-  
-  style.id = key;
+  style.id = Key;
   style.textContent = csstext;
   document.head.appendChild(style);
 }
