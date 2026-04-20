@@ -63,7 +63,6 @@ async function cachelayerThree(
     }
   }
   jsonResult = JsonArray.find((e) => e[utility] === jsonKey);
-
   let value = {
     ...(rawCSS !== null && { CSS: rawCSS }),
     ...(JsonArray !== null && { JSON: JsonArray })
@@ -81,7 +80,7 @@ async function cachelayerThree(
     ...(cssResult !== null && { CSS: cssResult }),
     ...(jsonResult !== null && { JSON: jsonResult })
   };
-
+  console.log(result)
   return result;
 }
 async function cachelayerTwo(
@@ -181,12 +180,11 @@ function InjectCSS(csstext, Key) {
   document.head.appendChild(style);
 }
 
-export async function ValidatAndLoadJSON(mapper, key, callback, utilityKey, component) {
-  if (!mapper) return false;
+export async function ValidatAndLoadJSON(cacheMap, key, callback, utilityKey, component) {
+  if (!cacheMap) return false;
   
-  mapper = mapper[utilityKey];
+  const mapper = cacheMap[utilityKey];
   let type = mapper["csspath"] !== null ? CACHETYPE.CSS : CACHETYPE.Default;
-
   const res = await SJCManager(
     mapper["jsonpath"],
     mapper["csspath"],
@@ -196,7 +194,6 @@ export async function ValidatAndLoadJSON(mapper, key, callback, utilityKey, comp
     key,
     'class'
   );
-
   callback((prev) => {
     if (prev[utilityKey] === res) return prev;
     return { ...prev, [utilityKey]: res };

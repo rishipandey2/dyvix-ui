@@ -20,7 +20,7 @@ const CacheMapping = {
     "csspath": "../../components/modal/dependencies/style/themes.css",
   },
   "animation": {
-    "jsonpath": "../../../animations.json",
+    "jsonpath": "../../components/animations.json",
     "csspath": null,
   },
   "presets": {
@@ -122,7 +122,11 @@ export async function ValidateInput(
       };
     }
   }
-  const isAnimation = await ValidatAndLoadJSON(CacheMapping, animation, callback, "animation", component);
+
+  const [isAnimation, isTheme] = await Promise.all([
+    ValidatAndLoadJSON(CacheMapping, animation, callback, "animation", component),
+    ValidatAndLoadJSON(CacheMapping, theme, callback, "theme", component)
+  ]);
 
   if (
     animation !== '!/' &&
@@ -134,7 +138,6 @@ export async function ValidateInput(
       error: 'Please provide a vaild animation.'
     };
   }
-  const isTheme = await ValidatAndLoadJSON(CacheMapping, theme, callback, "theme", component);
   if (!isTheme) {
     return {
       status: GaurdStatus.Error,
