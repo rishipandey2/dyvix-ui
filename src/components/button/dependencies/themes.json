@@ -20,6 +20,11 @@
     "default-animation": "unfold"
   },
   {
+    "theme": "Blade",
+    "class": "dyvix-button-blade",
+    "default-animation": "zoom"
+  },
+  {
     "theme": "Neon",
     "class": "dyvix-button-neon",
     "default-animation": "pulse"
