@@ -21,3 +21,24 @@
 .dyvix-file-lens:hover p {
   color: grey;
 }
+.dyvix-file-industrial {
+  border: 2px dashed #374151;
+  border-radius: 5px;
+  background-color: #0a1429;
+  transition: border-radius 0.2s ease,
+              background-color 0.3s ease,
+              transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dyvix-file-industrial p {
+  font-family: 'Geist';
+  color: #9ca3af;
+  transition: color 0.2s ease;
+}
+.dyvix-file-industrial:hover {
+  border-radius: 10px;
+  background-color: #6b7280;  
+  transform: scale(1.03);
+}
+.dyvix-file-industrial:hover p {
+  color: #ffffff;
+}
