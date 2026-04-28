@@ -6,7 +6,7 @@ export function FileTest() {
       <DyvixFile
         onUpload={(data) => console.log(data)}
         multiple={true}
-        theme={DYVIX_MODAL_THEME.FOREST}
+        theme={DYVIX_MODAL_THEME.MIDNIGHT}
         animation={"fade"}
         accept={".jpg, .jpeg, .png"}
       >
