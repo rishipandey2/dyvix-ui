@@ -4,6 +4,8 @@ export function InputTest() {
   return (
     <>
       <DyvixInput
+        animation= {DYVIX_GLOBAL_ANIMATION.AURORA}
+        type="text"
       />
     </>
   );

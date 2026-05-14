@@ -6,7 +6,7 @@ import React from 'react';
 import { Validateinput } from './validation';
 
 function DyvixInput({
-  type,
+  type = 'text',
   background,
   animation = '!/',
   className = '',
@@ -35,13 +35,15 @@ function DyvixInput({
       if (ele) ele.remove();
     };
   }, [type, animation]);
-  
+
   const currentAnimation = animation ? configs['animation'] : null;
+  const currentType = type ? configs['type'] : null;
+  const currentClass = className ? `${className} ${currentType?.class}` : currentType?.class;
 
   useGSAP(() => {
     if (!inputRef.current || !currentAnimation) return;
 
-    gsap.fromTo(btnRef.current, currentAnimation.from, {
+    gsap.fromTo(inputRef.current, currentAnimation.from, {
       ...currentAnimation.to,
       duration: currentAnimation['default-duration'],
       ease: currentAnimation.ease
@@ -50,7 +52,7 @@ function DyvixInput({
 
   return (
     <div className='dyvix-input-wrapper' ref={inputRef}>
-      <input className='dyvix-input' type='search'></input>
+      <input className={`dyvix-input ${currentClass}`} type='search'></input>
     </div>
   )
 }
