@@ -24,9 +24,57 @@ export default function Wrapper({
   }
 
   function handleConfigAddition() {
-    console.log('addded');
+    const currentVal = componentConfig.find(
+      (ele) => ele.utility === activeConfig && ele.type === 'config'
+    );
+
+    const isvalid = { status: 1, message: null };
+
+    for (const rule of currentVal['config-rules']) {
+      if (rule.required) {
+        const format = rule.formats;
+        const hasMultiple = format.includes('multiple');
+        const data = currentConfig[rule.rule];
+
+        if (hasMultiple) {
+          const isMissingEntry =
+            !data ||
+            data.length < amount ||
+            data.some((v) => !v || v.toString().trim() === '');
+
+          if (isMissingEntry) {
+            isvalid.status = -1;
+            isvalid.message = `All ${amount} fields for "${rule.rule}" must be filled.`;
+            break;
+          }
+        } else {
+          if (!data || data.toString().trim() === '') {
+            isvalid.status = -1;
+            isvalid.message = `${rule.rule} is required.`;
+            break;
+          }
+        }
+      }
+    }
+
+    if (isvalid.status === -1) {
+      console.error(isvalid.message);
+      return;
+    }
+
+    console.log(currentConfig);
+
+    componentCallback((prev) =>
+      prev.map((item) =>
+        item.utility === activeConfig
+          ? { ...item, current: [...item.current, ...[currentConfig]] }
+          : item
+      )
+    );
+
+    setActive('');
   }
-  console.log(currentConfig);
+
   React.useEffect(() => {
     let curr = `<${tag}\n`;
     for (const ele of componentConfig) {
@@ -186,7 +234,7 @@ export default function Wrapper({
                                   max={rule.max_val}
                                   min={1}
                                   className="playground-text"
-                                  value={1}
+                                  value={amount}
                                   onChange={(e) => {
                                     const val = Math.min(
                                       Number(e.target.value),
@@ -210,15 +258,20 @@ export default function Wrapper({
                                       className="playground-select"
                                       onChange={(e) => {
                                         const targetVal = e.target.value;
-
+                                        let currentVal;
                                         setConfig((prev) => {
-                                          const currentArray = prev[rule.rule]
-                                            ? prev[rule.rule]
-                                            : [];
-                                          currentArray[index] = targetVal;
+                                          if (hasMultiple) {
+                                            currentVal = prev[rule.rule]
+                                              ? prev[rule.rule]
+                                              : [];
+                                            currentVal[index] = targetVal;
+                                          } else {
+                                            currentVal = targetVal;
+                                          }
+
                                           return {
                                             ...prev,
-                                            [rule.rule]: currentArray
+                                            [rule.rule]: currentVal
                                           };
                                         });
                                       }}
@@ -246,15 +299,19 @@ export default function Wrapper({
                                       className="playground-text"
                                       onChange={(e) => {
                                         const targetVal = e.target.value;
-
+                                        let currentVal;
                                         setConfig((prev) => {
-                                          const currentArray = prev[rule.rule]
-                                            ? prev[rule.rule]
-                                            : [];
-                                          currentArray[index] = targetVal;
+                                          if (hasMultiple) {
+                                            currentVal = prev[rule.rule]
+                                              ? prev[rule.rule]
+                                              : [];
+                                            currentVal[index] = targetVal;
+                                          } else {
+                                            currentVal = targetVal;
+                                          }
                                           return {
                                             ...prev,
-                                            [rule.rule]: currentArray
+                                            [rule.rule]: currentVal
                                           };
                                         });
                                       }}
