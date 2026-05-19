@@ -6,7 +6,7 @@ import {
 } from '../../utils/DyvixGuard';
 import { isValidRegex } from './dependencies/validator/validators';
 import { ValidatAndLoadJSON } from '../../utils/Smart Json Caching/SJCManager';
-import { DYVIX_MODAL_PRESET } from '../../constants';
+import { DYVIX_MODAL_PRESET, DYVIX_MODAL_TYPE } from '../../constants';
 
 const CacheMapping = {
   theme: {
@@ -37,11 +37,14 @@ const defaultElement = {
   amount: 1
 };
 
-const { DYVIX_MODAL_ELEMENT } = await import('../../constants');
-const supportedTypes = Object.values(DYVIX_MODAL_ELEMENT);
 
+let supportedTypes = null;
 let config = null;
 
+async function getSupportedElements() {
+  const { DYVIX_MODAL_ELEMENT } = await import('../../constants.js');
+  return Object.values(DYVIX_MODAL_ELEMENT)
+}
 export async function SerializeData(
   title,
   type,
@@ -68,6 +71,7 @@ export async function SerializeData(
     callback,
     instance
   );
+  supportedTypes= await getSupportedElements();
 
   if (validator.status === GaurdStatus.Error) {
     return EvaluateFailure(validator.error, validator.status);
