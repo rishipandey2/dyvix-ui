@@ -162,15 +162,15 @@ function Modal({
     className + ` ${currentTheme?.class}` + ` ${currentType.class}`;
   // Dynamicily calculate modal sizing and position
   const heightMap = {
-    1: '23rem',
-    2: '25rem',
+    1: '19rem',
+    2: '24rem',
     3: '26rem',
-    4: '30rem',
-    5: '34rem',
-    6: '40rem',
-    7: '43rem',
-    8: '48rem',
-    9: '53rem'
+    4: '31rem',
+    5: '36rem',
+    6: '41rem',
+    7: '46rem',
+    8: '51rem',
+    9: '56rem'
   };
   let idealSize = heightMap[fields?.length] || '26rem';
   const geometryBuffer = currentTheme?.radiused
