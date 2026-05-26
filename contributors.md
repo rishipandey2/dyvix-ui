@@ -17,3 +17,4 @@ Thanks for everyone who has contributed to Dyvix UI!
 - [@SlncTrZ](https://github.com/SlncTrZ)
 - [@MFA-G](https://github.com/MFA-G)
 - [@JoshuaLutgendorff](https://github.com/JoshuaLutgendorff)
+- [@Anuragp22](https://github.com/Anuragp22)
