@@ -367,6 +367,9 @@ function Modal({
                         placeholder: field.placeholder[j],
                         'aria-label': field.placeholder[j]
                       }),
+                      ...(elementDef['supports-label'] && {
+                        label: field.placeholder[j]
+                      }),
                       ...(elementDef['supports_type'] && { type: field.type }),
                       ...(elementDef['supports_autocomplete'] && {
                         autoComplete:
