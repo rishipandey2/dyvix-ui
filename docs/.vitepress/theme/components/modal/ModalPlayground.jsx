@@ -102,10 +102,10 @@ export default function ModalPlayground() {
           amount: 2
         },
         {
-          type: 'text',
-          placeholder: ['First Namex', 'Last Namex'],
-          id: 'names',
-          name: ['firstNamez', 'lastNamez'],
+          type: 'email',
+          placeholder: ['Email Address', 'Confirm Email'],
+          id: 'contactEmails',
+          name: ['email', 'confirmEmail'],
           className: 'ex-text2',
           amount: 2
         }
