@@ -26,7 +26,7 @@
         "validation": "password"
       }
     ],
-    "default-animation": "fade",
+    "default-animation": "bubble",
     "default-theme": "Neon",
     "default-title": "Register"
   },
@@ -65,7 +65,7 @@
         "amount": 1
       }
     ],
-    "default-animation": "fade",
+    "default-animation": "aurora",
     "default-theme": "Neon",
     "default-title": "Forgot Password"
   },
@@ -89,7 +89,7 @@
         "amount": 1
       }
     ],
-    "default-animation": "fade",
+    "default-animation": "flip",
     "default-theme": "Neon",
     "default-title": "Reset Password"
   },
@@ -121,7 +121,7 @@
         "amount": 1
       }
     ],
-    "default-animation": "fade",
+    "default-animation": "glide",
     "default-theme": "Neon",
     "default-title": "Change Password"
   }
