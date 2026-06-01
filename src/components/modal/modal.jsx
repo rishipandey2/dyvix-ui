@@ -24,13 +24,18 @@ import { GaurdStatus } from '../../utils/DyvixGuard';
 import Version from '../../../package.json';
 import DyvixButton from '../button/button';
 import DyvixFile from '../file/file';
+import DyvixInput from '../input/input';
 import { values } from 'idb-keyval';
 
 export const validType = typesData.map((e) => e.type);
 export const validRules = validationData.map((e) => e.preset);
 
 export const eleData = elementsData;
-const componentsMap = { DynamicSelect: DynamicSelect, DyvixFile: DyvixFile };
+const componentsMap = {
+  DynamicSelect: DynamicSelect,
+  DyvixFile: DyvixFile,
+  DyvixInput: DyvixInput
+};
 
 /**
  * @param {Object} props
@@ -386,12 +391,14 @@ function Modal({
                       }),
                       ...(elementDef.tag !== 'DyvixFile' && {
                         onChange: (e) => {
-                          console.log(Tag)
-                          const value = elementDef['is_custom']
-                            ? e
-                            : field.type === 'checkbox'
-                              ? e.target.checked
-                              : e.target.value;
+                          const value =
+                            elementDef.tag === 'DyvixInput'
+                              ? e.target.value
+                              : elementDef['is_custom']
+                                ? e
+                                : field.type === 'checkbox'
+                                  ? e.target.checked
+                                  : e.target.value;
                           handleInputChange(name, value);
                         }
                       }),
